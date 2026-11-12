@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>JesigoTrace — Product Passport | JesigoGel Universitas Andalas</title>
+  <meta name="description" content="Transparansi asal-usul jeruk siam Gunung Omeh dari kebun mitra petani hingga sachet JesigoGel berenergi tinggi.">
+
+  <!-- Favicon / Brand Icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23F77F00'/><path d='M16 4 C16 4 20 8 20 12 C18 12 16 10 16 10 C16 10 14 12 12 12 C12 8 16 4 16 4Z' fill='%23143621'/><circle cx='16' cy='16' r='10' fill='%23FFB703'/><circle cx='16' cy='16' r='2' fill='%23FFFFFF'/></svg>">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              forest: '#143621',
+              dark: '#0F2417',
+              leaf: '#2D6A4F',
+              mint: '#D8F3DC',
+              mintLight: '#EBF5EE',
+              surface: '#FAF8F5',
+              surfaceAlt: '#F3EFEA',
+            },
+            citrus: {
+              amber: '#FFB703',
+              primary: '#F77F00',
+              deep: '#E85D04',
+              soft: '#FFDDD2',
+            }
+          },
+          boxShadow: {
+            'passport': '0 20px 45px -15px rgba(20, 54, 33, 0.12), 0 4px 16px -2px rgba(20, 54, 33, 0.04)',
+            'passport-hover': '0 28px 60px -15px rgba(20, 54, 33, 0.20), 0 8px 24px -4px rgba(20, 54, 33, 0.08)',
+            'dock': '0 16px 40px -8px rgba(15, 36, 23, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.85)',
+            'glow-orange': '0 10px 25px -5px rgba(247, 127, 0, 0.35)',
+            'glow-green': '0 10px 25px -5px rgba(45, 106, 79, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Design Tokens & Polish */
+    ::selection {
+      background-color: #D8F3DC;
+      color: #143621;
+    }
+
+    /* Strict Typography Scale (at least 1.25x steps between levels) */
+    body {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: clamp(40px, 6vw, 60px);
+      line-height: 1.12;
+    }
+    h2 {
+      font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.2;
+    }
+    h3 {
+      font-size: clamp(22px, 2.5vw, 28px);
+      line-height: 1.3;
+    }
+
+    /* Custom Modern Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF8F5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #40916C;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #1B4332;
+    }
+
+    /* Tabular numbers for clean data presentation */
+    .tabular-data {
+      font-feature-settings: "tnum";
+    }
+
+    /* Reveal Animations on Scroll */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Delay utilities */
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+    .delay-400 { transition-delay: 400ms; }
+
+    /* Timeline Connector Pulse Effect */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+    .pulse-glow {
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    /* Floating subtle bounce */
+    @keyframes floatSubtle {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.5deg); }
+    }
+    .animate-float {
+      animation: floatSubtle 5s ease-in-out infinite;
+    }
+
+    /* Toast Notification styles */
+    #toastContainer {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      pointer-events: none;
+    }
+    @media (min-width: 768px) {
+      #toastContainer {
+        bottom: 24px;
+        right: 24px;
+        left: auto;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#FAF8F5] text-slate-800 antialiased font-sans selection:bg-brand-mint selection:text-brand-forest pb-24 md:pb-0">
+
+  <!-- Toast Feedback Notification Container -->
+  <div id="toastContainer" class="flex flex-col gap-2 items-center md:items-end"></div>
+
+  <!-- ========================================================================= -->
+  <!-- TOP NAVIGATION BAR (Desktop & Tablet Header) -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-brand-forest/10 transition-all duration-300" id="mainHeader">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo & Passport Tag -->
+      <a href="#hero" class="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-leaf rounded-lg p-1">
+        <div class="w-10 h-10 rounded-xl bg-brand-forest flex items-center justify-center text-citrus-amber shadow-sm group-hover:scale-105 transition-transform duration-200">
+          <!-- Citrus leaf icon -->
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z" fill="#F77F00" stroke="#F77F00"/>
+            <path d="M12 2c0 5 3 9 8 9" stroke="#FFFFFF" stroke-width="2"/>
+            <path d="M12 2v20" stroke="#FAF8F5" stroke-opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xs font-bold tracking-widest text-brand-leaf uppercase">Product Passport</span>
+          <span class="text-xl font-black tracking-tight text-brand-forest group-hover:text-citrus-deep transition-colors">JESIGOGEL</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="#hero" class="hover:text-brand-forest transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-leaf hover:after:w-full after:transition-all">Beranda</a>
+        <a href="#passport-info" class="hover:text-brand-forest transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-leaf hover:after:w-full after:transition-all">Identitas Batch</a>
+        <a href="#perjalanan" class="hover:text-brand-forest transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-leaf hover:after:w-full after:transition-all">Perjalanan Produk</a>
+        <a href="#dampak" class="hover:text-brand-forest transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-leaf hover:after:w-full after:transition-all">Dampak Petani</a>
+        <a href="#traceability-flow" class="hover:text-brand-forest transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-leaf hover:after:w-full after:transition-all">Alur Lacak</a>
+      </nav>
+
+      <!-- Desktop Action CTA -->
+      <div class="hidden md:flex items-center gap-3">
+        <button onclick="openVerificationModal('JSG-001')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-forest text-white text-xs font-bold tracking-wide hover:bg-brand-leaf transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
+          <svg class="w-4 h-4 text-citrus-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          <span>Verifikasi Batch #JSG-001</span>
+        </button>
+      </div>
+
+      <!-- Mobile Top Indicator Badge (Batch Quick Status - calm indicator) -->
+      <div class="flex md:hidden items-center">
+        <button onclick="openVerificationModal('JSG-001')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-mint text-brand-forest text-xs font-bold border border-brand-leaf/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+          <span>JSG-001</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================================= -->
+    <!-- BAGIAN A: HERO SECTION & PRODUCT PASSPORT -->
+    <!-- ========================================================================= -->
+    <section id="hero" class="relative pt-6 pb-16 md:pt-12 md:pb-24 overflow-hidden">
+      <!-- Subtle Decorative Background Circles -->
+      <div class="absolute -top-32 -right-32 w-96 h-96 bg-citrus-amber/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 -left-32 w-96 h-96 bg-brand-mint/30 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+        <!-- Top Micro Tag (PRD requirement: Teks kecil "Product Passport" dengan warna hijau) -->
+        <div class="flex items-center justify-center md:justify-start gap-2 mb-4 reveal-on-scroll">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-forest/5 text-brand-leaf border border-brand-leaf/20 text-xs font-bold tracking-wider uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-citrus-primary"></span>
+            Official Product Passport
+          </span>
+          <span class="text-xs font-medium text-slate-500">Inisiasi Riset Universitas Andalas</span>
+        </div>
+
+        <!-- Headline & Subheadline Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <div class="lg:col-span-7 text-center md:text-left reveal-on-scroll delay-100">
+            <!-- PRD: Headline "Dari Kebun, Sampai ke Gel Energi Anda." -->
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-forest leading-[1.12] tracking-tight">
+              Dari Kebun, Sampai ke Gel Energi Anda.
+            </h1>
+            
+            <!-- PRD: Sub-headline -->
+            <p class="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto md:mx-0">
+              Kenali perjalanan jeruk siam Gunung Omeh yang menjadi bahan baku <strong class="text-brand-forest font-bold">JesigoGel</strong> — pangan berenergi tinggi yang mengusung transparansi penuh dari mitra petani hingga tangan Anda.
+            </p>
+
+            <!-- Quick Action Buttons -->
+            <div class="mt-6 sm:mt-8 flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4">
+              <a href="#perjalanan" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-brand-forest text-white font-bold text-sm shadow-md hover:bg-brand-leaf transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0">
+                <span>Telusuri Perjalanan</span>
+                <svg class="w-4 h-4 text-citrus-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+              </a>
+              <button onclick="openVerificationModal('JSG-001')" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white text-brand-forest font-bold text-sm border border-brand-forest/15 shadow-sm hover:border-brand-leaf hover:bg-brand-mintLight transition-all duration-200">
+                <svg class="w-4 h-4 text-citrus-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span>Lihat Sertifikat Uji Mutu</span>
+              </button>
+            </div>
+
+            <!-- Quick Trust Badges -->
+            <div class="mt-8 pt-6 border-t border-brand-forest/10 flex flex-wrap items-center justify-center md:justify-start gap-6 text-xs text-slate-500 font-semibold">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Standar Pangan BPOM & Lab</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-citrus-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+                <span>40% Sari Jeruk Murni</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand-leaf" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.732V5a2 2 0 012-2h4a2 2 0 012 2v8.268A4.498 4.498 0 0017 13a4.498 4.498 0 00-4 2.268z" clip-rule="evenodd"/>
+                </svg>
+                <span>Riset Inovasi UNAND</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hero Image & Sachet Visual Showcase (PRD: Gambar jeruk siam di pohon yang segar sudut pandang dekat) -->
+          <div class="lg:col-span-5 reveal-on-scroll delay-200">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              
+              <!-- Main Photo Card (Oranges on branch) -->
+              <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 group">
+                <img src="assets/images/hero-orange.jpg" alt="Jeruk Siam Gunung Omeh Segar di Dahan Pohon" class="w-full h-80 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-forest/90 via-brand-forest/20 to-transparent"></div>
+                
+                <!-- Photo Overlay Tag (Translucent floating banner) -->
+                <div class="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-black/60 backdrop-blur-md text-white flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-2 h-2 rounded-full bg-citrus-amber"></span>
+                    <div>
+                      <p class="text-xs font-bold leading-tight">Varietas Jeruk Siam</p>
+                      <p class="text-[10px] text-slate-300 font-medium">Gunung Omeh • Elevasi 850 mdpl</p>
+                    </div>
+                  </div>
+                  <span class="px-2 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider">Matang Pohon</span>
+                </div>
+              </div>
+
+              <!-- Floating Sachet Mockup (Single clean floating layer) -->
+              <div class="hidden sm:block absolute -bottom-6 -right-6 w-40 sm:w-44 p-3 bg-white/95 backdrop-blur-md rounded-2xl shadow-passport border border-brand-forest/10 animate-float text-center">
+                <img src="assets/images/jesigogel-sachet.svg" alt="JesigoGel Sachet 50 ml Mockup" class="h-40 w-auto mx-auto object-contain drop-shadow-sm hover:scale-105 transition-transform duration-300">
+                <div class="mt-2 text-center">
+                  <span class="text-[10px] font-bold text-brand-forest block">JesigoGel 50 ml</span>
+                  <span class="text-[9px] text-citrus-deep font-semibold">Energi Alami Atlet</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- PRD BAGIAN A: INFO GRID (Kotak Card Product Passport) -->
+        <!-- ========================================================================= -->
+        <div id="passport-info" class="mt-14 sm:mt-20 reveal-on-scroll delay-200">
+          
+          <div class="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-passport border border-brand-forest/10 relative overflow-hidden transition-all duration-300">
+            <!-- Decorative Subtle Accent Bar -->
+            <div class="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-brand-forest via-brand-leaf to-citrus-primary"></div>
+            
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-4 border-b border-brand-forest/10 gap-4">
+              <div>
+                <span class="text-xs font-bold tracking-widest text-citrus-deep uppercase">Authentic Batch Identity</span>
+                <!-- H2 heading for proper outline and size step -->
+                <h2 class="text-2xl sm:text-3xl font-black text-brand-forest">JesigoTrace Passport Data</h2>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-500">Pindai dari Kemasan:</span>
+                <span class="px-3 py-1 rounded-lg bg-brand-surfaceAlt font-mono text-xs font-bold text-brand-forest border border-brand-forest/10">QR Code Verified</span>
+              </div>
+            </div>
+
+            <!-- The 4 PRD Specified Grid Columns (Flat layout, avoiding nested cards slop) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-brand-forest/10 py-2">
+              
+              <!-- 1. NOMOR BATCH: JSG-001 -->
+              <div class="py-4 sm:py-2 sm:px-5 group">
+                <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-2">
+                  <span class="uppercase tracking-wider">Nomor Batch</span>
+                  <button onclick="copyToClipboard('JSG-001', 'Nomor batch JSG-001 berhasil disalin!')" title="Salin Nomor Batch" class="p-1 rounded text-slate-400 hover:text-brand-leaf hover:bg-brand-mint/50 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-2xl sm:text-3xl font-black font-mono tracking-tight text-brand-forest group-hover:text-citrus-deep transition-colors">JSG-001</span>
+                </div>
+                <p class="mt-2 text-xs text-slate-500 font-medium">Panen: 08 Nov 2026 • Kemasan 50 ml</p>
+              </div>
+
+              <!-- 2. STATUS PRODUK: Terverifikasi (badge warna hijau dengan ikon centang) -->
+              <div class="py-4 sm:py-2 sm:px-5 group">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Status Produk</span>
+                <div class="mt-1">
+                  <!-- Green Badge with Check Icon (PRD specification) -->
+                  <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-sm">
+                    <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>Terverifikasi</span>
+                  </span>
+                </div>
+                <p class="mt-3 text-xs text-slate-500 font-medium">Lulus uji parameter keamanan & mikrobiologi</p>
+              </div>
+
+              <!-- 3. ASAL BAHAN BAKU: Gunung Omeh -->
+              <div class="py-4 sm:py-2 sm:px-5 group">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Asal Bahan Baku</span>
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5 text-citrus-deep shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  <span class="text-xl sm:text-2xl font-black text-brand-forest group-hover:text-brand-leaf transition-colors">Gunung Omeh</span>
+                </div>
+                <p class="mt-2 text-xs text-slate-500 font-medium">Kab. Lima Puluh Kota, Sumatera Barat</p>
+              </div>
+
+              <!-- 4. KANDUNGAN SARI JERUK: 40% -->
+              <div class="py-4 sm:py-2 sm:px-5 group">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 block">Kandungan Sari Jeruk</span>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-2xl sm:text-3xl font-black tabular-data text-citrus-primary group-hover:text-citrus-deep transition-colors">40%</span>
+                  <span class="text-xs font-bold text-slate-600">Sari Buah Alami</span>
+                </div>
+                <!-- Visual Mini Progress Bar -->
+                <div class="w-full bg-slate-200 h-2 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-gradient-to-r from-citrus-amber to-citrus-deep h-2 rounded-full" style="width: 40%"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Passport Card Bottom Quick Drawer Trigger -->
+            <div class="mt-6 pt-5 border-t border-brand-forest/10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-leaf"></span>
+                <span>Data tersinkronisasi dengan Pusat Riset Inovasi Universitas Andalas.</span>
+              </div>
+              <button onclick="openVerificationModal('JSG-001')" class="font-bold text-brand-leaf hover:text-brand-forest hover:underline flex items-center gap-1 transition-colors">
+                <span>Buka Detail Lembar Uji Laboratorium</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- BAGIAN B: PERJALANAN PRODUK (Timeline Vertikal 5 Tahapan) -->
+    <!-- ========================================================================= -->
+    <section id="perjalanan" class="py-16 md:py-28 bg-[#F3EFEA]/60 relative">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-14 md:mb-20 reveal-on-scroll">
+          <span class="text-xs font-bold tracking-widest text-citrus-deep uppercase block mb-2">Hulu ke Hilir</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-forest tracking-tight">
+            Perjalanan Produk
+          </h2>
+          <p class="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+            Storytelling 5 tahapan transparan: mulai dari dahan pohon mitra petani di Gunung Omeh hingga formulasi gel energi siap santap di saku jersey Anda.
+          </p>
+        </div>
+
+        <!-- Vertical Timeline Container -->
+        <div class="relative">
+          
+          <!-- Central Connecting Vertical Line (Desktop & Mobile) -->
+          <div class="absolute left-6 md:left-1/2 top-4 bottom-4 w-1 bg-gradient-to-b from-brand-leaf via-citrus-primary to-brand-forest -translate-x-1/2 rounded-full opacity-30"></div>
+          
+          <!-- Timeline Steps List (PRD specifies 5 stages with scroll fade-in animation) -->
+          <div class="space-y-12 sm:space-y-16">
+
+            <!-- Step 01: Asal Kebun -->
+            <div class="relative flex flex-col md:flex-row items-center gap-6 md:gap-12 reveal-on-scroll">
+              <div class="absolute left-6 md:left-1/2 -translate-x-1/2 z-10 w-12 h-12 rounded-full bg-brand-forest border-4 border-[#FAF8F5] shadow-lg flex items-center justify-center text-white font-extrabold text-sm pulse-glow">
+                01
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-0 md:pr-12 md:text-right">
+                <div class="bg-white p-6 sm:p-7 rounded-2xl shadow-passport border border-brand-forest/10 hover:shadow-passport-hover hover:-translate-y-1 transition-all duration-300">
+                  <span class="text-xs font-bold tracking-wider text-citrus-deep uppercase block mb-1">Tahap 01 — Hulu Perkebunan</span>
+                  <h3 class="text-xl sm:text-2xl font-extrabold text-brand-forest">Asal Kebun</h3>
+                  <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                    Jeruk siam berasal dari kebun mitra petani Gunung Omeh, Kabupaten Lima Puluh Kota.
+                  </p>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap gap-2 md:justify-end text-[11px] font-semibold text-brand-leaf">
+                    <span class="px-2.5 py-1 rounded-md bg-brand-mint/60">Ketinggian 800+ mdpl</span>
+                    <span class="px-2.5 py-1 rounded-md bg-brand-mint/60">Mitra Petani Lokal</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-12">
+                <div class="rounded-2xl overflow-hidden shadow-passport border-2 border-white group relative aspect-[4/3] bg-slate-900">
+                  <img src="assets/images/step1-kebun.jpg" alt="Petani memetik jeruk siam di kebun Gunung Omeh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-3 left-3 text-white">
+                    <span class="text-xs font-bold block">Pemetikan Selektif</span>
+                    <span class="text-[10px] text-slate-300">Buah matang pohon dengan kadar asam-manis seimbang</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 02: Pengumpulan dan Sortasi -->
+            <div class="relative flex flex-col md:flex-row-reverse items-center gap-6 md:gap-12 reveal-on-scroll delay-100">
+              <div class="absolute left-6 md:left-1/2 -translate-x-1/2 z-10 w-12 h-12 rounded-full bg-citrus-deep border-4 border-[#FAF8F5] shadow-lg flex items-center justify-center text-white font-extrabold text-sm pulse-glow">
+                02
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-12 md:pr-0 md:text-left">
+                <div class="bg-white p-6 sm:p-7 rounded-2xl shadow-passport border border-brand-forest/10 hover:shadow-passport-hover hover:-translate-y-1 transition-all duration-300">
+                  <span class="text-xs font-bold tracking-wider text-citrus-deep uppercase block mb-1">Tahap 02 — Pascapanen</span>
+                  <h3 class="text-xl sm:text-2xl font-extrabold text-brand-forest">Pengumpulan dan Sortasi</h3>
+                  <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                    Buah sortiran yang masih layak diolah dikumpulkan dari petani mitra.
+                  </p>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap gap-2 text-[11px] font-semibold text-citrus-deep">
+                    <span class="px-2.5 py-1 rounded-md bg-citrus-soft/40">Zero Food Waste</span>
+                    <span class="px-2.5 py-1 rounded-md bg-citrus-soft/40">Sortasi Fisik Higienis</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-0 md:pr-12">
+                <div class="rounded-2xl overflow-hidden shadow-passport border-2 border-white group relative aspect-[4/3] bg-slate-900">
+                  <img src="assets/images/step2-sortasi.jpg" alt="Keranjang jeruk siam hasil sortasi pascapanen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-3 left-3 text-white">
+                    <span class="text-xs font-bold block">Penyelamatan Buah Sortir</span>
+                    <span class="text-[10px] text-slate-300">Meningkatkan nilai tambah hasil panen non-grade meja</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 03: Proses Produksi -->
+            <div class="relative flex flex-col md:flex-row items-center gap-6 md:gap-12 reveal-on-scroll delay-150">
+              <div class="absolute left-6 md:left-1/2 -translate-x-1/2 z-10 w-12 h-12 rounded-full bg-brand-leaf border-4 border-[#FAF8F5] shadow-lg flex items-center justify-center text-white font-extrabold text-sm pulse-glow">
+                03
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-0 md:pr-12 md:text-right">
+                <div class="bg-white p-6 sm:p-7 rounded-2xl shadow-passport border border-brand-forest/10 hover:shadow-passport-hover hover:-translate-y-1 transition-all duration-300">
+                  <span class="text-xs font-bold tracking-wider text-brand-leaf uppercase block mb-1">Tahap 03 — Ekstraksi & Formulasi</span>
+                  <h3 class="text-xl sm:text-2xl font-extrabold text-brand-forest">Proses Produksi</h3>
+                  <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                    Ekstraksi sari jeruk, formulasi gel, dan pengemasan dalam sachet 50 ml.
+                  </p>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap gap-2 md:justify-end text-[11px] font-semibold text-brand-leaf">
+                    <span class="px-2.5 py-1 rounded-md bg-brand-mint/60">Ekstraksi Dingin (Cold-Press)</span>
+                    <span class="px-2.5 py-1 rounded-md bg-brand-mint/60">Sachet Alumunium Foil 50 ml</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-12">
+                <div class="rounded-2xl overflow-hidden shadow-passport border-2 border-white group relative aspect-[4/3] bg-slate-900">
+                  <img src="assets/images/step3-produksi.jpg" alt="Mesin ekstraksi dan formulasi produksi JesigoGel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-3 left-3 text-white">
+                    <span class="text-xs font-bold block">Fasilitas Higienis Standar GMP</span>
+                    <span class="text-[10px] text-slate-300">Menjaga kandungan vitamin C dan bioflavonoid alami</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 04: Pemeriksaan Mutu -->
+            <div class="relative flex flex-col md:flex-row-reverse items-center gap-6 md:gap-12 reveal-on-scroll delay-200">
+              <div class="absolute left-6 md:left-1/2 -translate-x-1/2 z-10 w-12 h-12 rounded-full bg-brand-forest border-4 border-[#FAF8F5] shadow-lg flex items-center justify-center text-white font-extrabold text-sm pulse-glow">
+                04
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-12 md:pr-0 md:text-left">
+                <div class="bg-white p-6 sm:p-7 rounded-2xl shadow-passport border border-brand-forest/10 hover:shadow-passport-hover hover:-translate-y-1 transition-all duration-300">
+                  <span class="text-xs font-bold tracking-wider text-emerald-700 uppercase block mb-1">Tahap 04 — Quality Control</span>
+                  <h3 class="text-xl sm:text-2xl font-extrabold text-brand-forest">Pemeriksaan Mutu</h3>
+                  <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                    Informasi pengujian keamanan pangan dan daya simpan sesuai hasil pemeriksaan.
+                  </p>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap gap-2 text-[11px] font-semibold text-emerald-800">
+                    <span class="px-2.5 py-1 rounded-md bg-emerald-100">Uji Mikrobiologi Negatif</span>
+                    <span class="px-2.5 py-1 rounded-md bg-emerald-100">Uji Daya Simpan Stabil</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-0 md:pr-12">
+                <div class="rounded-2xl overflow-hidden shadow-passport border-2 border-white group relative aspect-[4/3] bg-slate-900">
+                  <img src="assets/images/step4-lab.jpg" alt="Laboratorium pemeriksaan mutu dan keamanan pangan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-3 left-3 text-white">
+                    <span class="text-xs font-bold block">Laboratorium Pangan UNAND</span>
+                    <span class="text-[10px] text-slate-300">Verifikasi ketat sebelum rilis nomor batch</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 05: Produk Siap Dikonsumsi -->
+            <div class="relative flex flex-col md:flex-row items-center gap-6 md:gap-12 reveal-on-scroll delay-250">
+              <div class="absolute left-6 md:left-1/2 -translate-x-1/2 z-10 w-12 h-12 rounded-full bg-citrus-primary border-4 border-[#FAF8F5] shadow-lg flex items-center justify-center text-white font-extrabold text-sm pulse-glow">
+                05
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-0 md:pr-12 md:text-right">
+                <div class="bg-white p-6 sm:p-7 rounded-2xl shadow-passport border border-brand-forest/10 hover:shadow-passport-hover hover:-translate-y-1 transition-all duration-300">
+                  <span class="text-xs font-bold tracking-wider text-citrus-deep uppercase block mb-1">Tahap 05 — Konsumsi & Energi</span>
+                  <h3 class="text-xl sm:text-2xl font-extrabold text-brand-forest">Produk Siap Dikonsumsi</h3>
+                  <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                    Produk JesigoGel siap didistribusikan kepada konsumen.
+                  </p>
+                  <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap gap-2 md:justify-end text-[11px] font-semibold text-citrus-deep">
+                    <span class="px-2.5 py-1 rounded-md bg-citrus-soft/40">Mudah Disobek Saat Bergerak</span>
+                    <span class="px-2.5 py-1 rounded-md bg-citrus-soft/40">Glukosa & Fruktosa Alami</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full md:w-1/2 pl-16 md:pl-12">
+                <div class="rounded-2xl overflow-hidden shadow-passport border-2 border-white group relative aspect-[4/3] bg-slate-900">
+                  <img src="assets/images/step5-produk.jpg" alt="Konsumsi JesigoGel untuk stamina dan energi olahraga" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-3 left-3 text-white">
+                    <span class="text-xs font-bold block">Energi Cepat Alami</span>
+                    <span class="text-[10px] text-slate-300">Mendukung performa atlet lari, gowes, dan aktivitas intensif</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- BAGIAN C: DAMPAK SOSIAL (Social Impact) -->
+    <!-- ========================================================================= -->
+    <section id="dampak" class="py-16 md:py-24 bg-[#FAF8F5] relative overflow-hidden">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+
+        <!-- PRD: Kotak dengan latar belakang hijau muda (mint/light green), sudut membulat (rounded). Hover effects scale up & shadow menebal. -->
+        <div class="bg-gradient-to-br from-[#D8F3DC] via-[#E8F5E9] to-[#C7E9C0] rounded-3xl p-8 sm:p-12 lg:p-14 border border-brand-leaf/20 shadow-passport hover:shadow-passport-hover hover:scale-[1.01] transition-all duration-300 reveal-on-scroll relative overflow-hidden">
+          
+          <!-- Background Pattern Illustration -->
+          <div class="absolute top-0 right-0 -mt-12 -mr-12 w-64 h-64 bg-brand-leaf/5 rounded-full blur-2xl pointer-events-none"></div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-7">
+              <!-- Hashtag Tag -->
+              <span class="inline-block px-3.5 py-1 rounded-full bg-brand-forest text-citrus-amber font-mono text-xs font-bold tracking-wide mb-4">
+                #DariPetaniUntukEnergi
+              </span>
+
+              <!-- PRD: Judul "Dampak untuk Petani #DariPetaniUntukEnergi" -->
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-forest tracking-tight">
+                Dampak untuk Petani
+              </h2>
+
+              <!-- PRD: Teks "Setiap pembelian JesigoGel turut mendukung pemanfaatan buah sortiran dan peningkatan nilai ekonomi hasil panen petani jeruk Gunung Omeh." -->
+              <p class="mt-4 text-base sm:text-lg text-[#1B4332] leading-relaxed font-medium">
+                Setiap pembelian JesigoGel turut mendukung pemanfaatan buah sortiran dan peningkatan nilai ekonomi hasil panen petani jeruk Gunung Omeh.
+              </p>
+
+              <!-- Impact Metrics: Flat clean metric row (eliminates nested card slop) -->
+              <div class="mt-8 grid grid-cols-3 divide-x divide-brand-forest/20 pt-6 border-t border-brand-forest/20 text-center">
+                <div class="px-2">
+                  <span class="text-2xl sm:text-3xl font-black text-citrus-deep block tabular-data">+35%</span>
+                  <span class="text-xs font-bold text-brand-forest block mt-1">Nilai Tambah Buah Sortir</span>
+                </div>
+                <div class="px-2">
+                  <span class="text-2xl sm:text-3xl font-black text-brand-forest block tabular-data">100%</span>
+                  <span class="text-xs font-bold text-brand-forest block mt-1">Jeruk Lokal Gunung Omeh</span>
+                </div>
+                <div class="px-2">
+                  <span class="text-2xl sm:text-3xl font-black text-brand-leaf block tabular-data">45+</span>
+                  <span class="text-xs font-bold text-brand-forest block mt-1">Mitra Petani Diberdayakan</span>
+                </div>
+              </div>
+
+              <!-- PRD: Footer teks kecil: "Ilustrasi konsep antarmuka, bukan data batch aktual." -->
+              <p class="mt-6 text-xs text-[#2D6A4F] italic">
+                * Ilustrasi konsep antarmuka, bukan data batch aktual.
+              </p>
+            </div>
+
+            <!-- Farmer Photo Card -->
+            <div class="lg:col-span-5">
+              <div class="rounded-2xl overflow-hidden relative aspect-[4/3] sm:aspect-square group bg-slate-900">
+                <img src="assets/images/impact-petani.jpg" alt="Mitra Petani Jeruk Siam Gunung Omeh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-forest/90 via-brand-forest/30 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4 text-white">
+                  <span class="text-xs font-bold uppercase tracking-wider text-citrus-amber block">Kolaborasi Berkelanjutan</span>
+                  <p class="text-sm font-semibold mt-0.5">Mendukung Kemandirian Petani Nagari Koto Tinggi & Gunung Omeh</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- BAGIAN D: ALUR KETERLULUSAN (Traceability Flow) -->
+    <!-- ========================================================================= -->
+    <section id="traceability-flow" class="py-16 md:py-24 bg-[#F3EFEA]/50 relative">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 reveal-on-scroll">
+          <span class="text-xs font-bold tracking-widest text-brand-leaf uppercase block mb-2">Transparansi Digital</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-forest tracking-tight">
+            Alur Keterlulusan
+          </h2>
+          <p class="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+            Hanya 3 langkah sederhana dari kemasan fisik hingga lembar transparansi digital penuh.
+          </p>
+        </div>
+
+        <!-- PRD: Tiga kotak horizontal (menggunakan Flexbox/Grid) dengan panah di antaranya: -->
+        <!-- 1. Ikon Kotak/Paket (Kemasan JesigoGel) -->
+        <!-- 2. Ikon QR Code (Scan QR Code) -->
+        <!-- 3. Ikon Smartphone (Halaman informasi batch produk) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative reveal-on-scroll">
+          
+          <!-- Box 1: Kemasan JesigoGel -->
+          <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-passport border border-brand-forest/10 flex flex-col items-center text-center relative group hover:-translate-y-1 hover:shadow-passport-hover transition-all duration-300">
+            <div class="w-16 h-16 rounded-2xl bg-brand-surfaceAlt flex items-center justify-center text-brand-forest mb-5 group-hover:scale-110 transition-transform duration-200 border border-brand-forest/10">
+              <!-- Package Box Icon -->
+              <svg class="w-8 h-8 text-citrus-deep" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-citrus-primary uppercase tracking-wider mb-1">Langkah 1</span>
+            <h3 class="text-xl font-bold text-brand-forest">Kemasan JesigoGel</h3>
+            <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Ambil sachet JesigoGel 50 ml Anda dan temukan kode QR otentik pada bagian belakang kemasan.
+            </p>
+            <div class="mt-4 px-3 py-1 rounded-full bg-brand-mint/60 text-brand-forest font-semibold text-xs">
+              Kemasan Bersegel Resmi
+            </div>
+
+            <!-- Arrow Indicator (Visible on Desktop between cards) -->
+            <div class="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-brand-forest text-citrus-amber items-center justify-center shadow-md">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Box 2: Scan QR Code -->
+          <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-passport border border-brand-forest/10 flex flex-col items-center text-center relative group hover:-translate-y-1 hover:shadow-passport-hover transition-all duration-300">
+            <div class="w-16 h-16 rounded-2xl bg-brand-surfaceAlt flex items-center justify-center text-brand-forest mb-5 group-hover:scale-110 transition-transform duration-200 border border-brand-forest/10">
+              <!-- QR Code Icon -->
+              <svg class="w-8 h-8 text-brand-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-citrus-primary uppercase tracking-wider mb-1">Langkah 2</span>
+            <h3 class="text-xl font-bold text-brand-forest">Pindai QR Code</h3>
+            <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Buka kamera smartphone Anda dan arahkan ke kode QR tanpa perlu mengunduh aplikasi tambahan.
+            </p>
+            <div class="mt-4 px-3 py-1 rounded-full bg-brand-mint/60 text-brand-forest font-semibold text-xs">
+              Instan & Tanpa Login
+            </div>
+
+            <!-- Arrow Indicator (Visible on Desktop between cards) -->
+            <div class="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-brand-forest text-citrus-amber items-center justify-center shadow-md">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Box 3: Halaman Informasi Batch Produk -->
+          <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-passport border border-brand-forest/10 flex flex-col items-center text-center relative group hover:-translate-y-1 hover:shadow-passport-hover transition-all duration-300">
+            <div class="w-16 h-16 rounded-2xl bg-brand-surfaceAlt flex items-center justify-center text-brand-forest mb-5 group-hover:scale-110 transition-transform duration-200 border border-brand-forest/10">
+              <!-- Smartphone Icon -->
+              <svg class="w-8 h-8 text-brand-leaf" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-citrus-primary uppercase tracking-wider mb-1">Langkah 3</span>
+            <h3 class="text-xl font-bold text-brand-forest">Halaman Batch Produk</h3>
+            <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Dapatkan data riwayat asal kebun, tanggal petik, hasil uji lab, dan sertifikat mutu secara langsung.
+            </p>
+            <div class="mt-4 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-semibold text-xs">
+              Transparansi Terverifikasi
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PRD Detail Tambahan: List Contoh Identitas Batch (Clean list without card nesting) -->
+        <div class="mt-14 bg-white rounded-2xl p-6 sm:p-8 shadow-passport border border-brand-forest/10 reveal-on-scroll delay-100">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-brand-forest/10 gap-3">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-citrus-deep">Simulasi Verifikasi Batch</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-brand-forest">Contoh Identitas Batch Produk</h3>
+            </div>
+            <div class="text-xs text-slate-500">
+              Pilih batch di bawah untuk menguji interaktivitas sistem:
+            </div>
+          </div>
+
+          <!-- Clean list items with dividers (PRD: Batch: JSG-001, Tanggal: 08 Nov 2026, Status: Lulus uji mutu) -->
+          <div class="divide-y divide-brand-forest/10">
+            
+            <!-- Batch JSG-001 (Active Demo) -->
+            <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl bg-brand-forest text-citrus-amber flex items-center justify-center font-mono font-bold text-xs shrink-0">
+                  01
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono font-bold text-base text-brand-forest">Batch: JSG-001</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-citrus-soft/50 text-citrus-deep">Batch Utama</span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500 mt-1">
+                    <span><strong>Tanggal:</strong> 08 Nov 2026</span>
+                    <span><strong>Asal:</strong> Kebun Mitra Gunung Omeh</span>
+                    <span><strong>Sari Jeruk:</strong> 40% Murni</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 self-end sm:self-center">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-300">
+                  <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Status: Lulus uji mutu</span>
+                </span>
+                <button onclick="openVerificationModal('JSG-001')" class="px-3.5 py-1.5 rounded-lg bg-brand-forest text-white text-xs font-bold hover:bg-brand-leaf transition-colors shadow-sm">
+                  Lihat Detail
+                </button>
+              </div>
+            </div>
+
+            <!-- Batch JSG-002 (Secondary Demo) -->
+            <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0">
+                  02
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono font-bold text-base text-brand-forest">Batch: JSG-002</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-700">Riset Khusus Atlet</span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500 mt-1">
+                    <span><strong>Tanggal:</strong> 12 Nov 2026</span>
+                    <span><strong>Asal:</strong> Koto Tinggi, Gunung Omeh</span>
+                    <span><strong>Sari Jeruk:</strong> 42% Murni</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 self-end sm:self-center">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-300">
+                  <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Status: Lulus uji mutu</span>
+                </span>
+                <button onclick="openVerificationModal('JSG-002')" class="px-3.5 py-1.5 rounded-lg bg-white border border-brand-forest/20 text-brand-forest text-xs font-bold hover:bg-brand-forest hover:text-white transition-colors shadow-sm">
+                  Lihat Detail
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- INTERACTIVE QR SCANNER BANNER -->
+    <!-- ========================================================================= -->
+    <section class="py-14 bg-brand-forest text-white relative overflow-hidden">
+      <!-- Background Glow -->
+      <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-citrus-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="flex items-center gap-5">
+          <div class="w-16 h-16 rounded-2xl bg-white/10 p-2 flex items-center justify-center shrink-0 border border-white/20">
+            <img src="assets/images/qr-code.svg" alt="Pindai QR JesigoTrace" class="w-full h-full object-contain">
+          </div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-black text-white">Ingin Cek Kemasan Anda Sekarang?</h2>
+            <p class="text-sm text-brand-mint/80 mt-1">Masukkan kode batch dari sachet Anda atau gunakan barcode simulator kami.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <button onclick="openVerificationModal('JSG-001')" class="w-full md:w-auto px-6 py-3.5 rounded-xl bg-citrus-primary text-white font-bold text-sm hover:bg-citrus-deep transition-all duration-200 shadow-glow-orange flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+            </svg>
+            <span>Buka Scanner & Passport</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- BAGIAN E: FOOTER -->
+    <!-- ========================================================================= -->
+    <footer class="bg-brand-dark text-slate-300 pt-16 pb-28 md:pb-16 border-t border-brand-forest/20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-white/10">
+          
+          <!-- Column 1: Logo & PRD Slogan -->
+          <div class="md:col-span-5">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-9 h-9 rounded-xl bg-brand-leaf flex items-center justify-center text-citrus-amber shadow-sm">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z" fill="#F77F00" stroke="#F77F00"/>
+                  <path d="M12 2c0 5 3 9 8 9" stroke="#FFFFFF" stroke-width="2"/>
+                </svg>
+              </div>
+              <span class="text-xl font-black tracking-tight text-white">JESIGOGEL</span>
+            </div>
+
+            <!-- PRD specified slogan: "JesigoTrace - Know Your Energy, Trace Your Orange." -->
+            <p class="text-base font-bold text-brand-mint leading-snug">
+              JesigoTrace — Know Your Energy, Trace Your Orange.
+            </p>
+            <p class="mt-2 text-xs text-slate-400 leading-relaxed max-w-sm">
+              Inisiatif keterbukaan rantai pasok dan valorisasi produk hortikultura lokal berbasis riset pangan Universitas Andalas.
+            </p>
+          </div>
+
+          <!-- Column 2: Navigasi Cepat -->
+          <div class="md:col-span-3 text-sm">
+            <div class="text-xs font-bold uppercase tracking-wider text-white mb-3">Navigasi Halaman</div>
+            <ul class="space-y-2 text-xs text-slate-400">
+              <li><a href="#hero" class="hover:text-brand-mint transition-colors">Beranda & Product Passport</a></li>
+              <li><a href="#passport-info" class="hover:text-brand-mint transition-colors">Identitas Batch Terkini</a></li>
+              <li><a href="#perjalanan" class="hover:text-brand-mint transition-colors">5 Tahapan Perjalanan Produk</a></li>
+              <li><a href="#dampak" class="hover:text-brand-mint transition-colors">Dampak Sosial Petani</a></li>
+              <li><a href="#traceability-flow" class="hover:text-brand-mint transition-colors">Alur Keterlulusan</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Lembaga & Legal -->
+          <div class="md:col-span-4 text-sm">
+            <div class="text-xs font-bold uppercase tracking-wider text-white mb-3">Kolaborasi & Afiliasi</div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Dikembangkan oleh Tim Riset Inovasi Pangan Universitas Andalas bekerja sama dengan Gabungan Kelompok Tani (Gapoktan) Jeruk Siam Nagari Koto Tinggi, Kecamatan Gunung Omeh, Kabupaten Lima Puluh Kota.
+            </p>
+            <div class="mt-4 flex items-center gap-2 text-[11px] text-brand-mint font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span>Terintegrasi Sistem Traceability 2026</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PRD: Copyright Universitas Andalas 2026. -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+          <p>© Copyright Universitas Andalas 2026. Seluruh hak cipta dilindungi.</p>
+          <div class="flex items-center gap-6">
+            <a href="#hero" class="hover:text-white transition-colors">Kembali ke Atas ↑</a>
+            <button onclick="openVerificationModal('JSG-001')" class="text-citrus-amber hover:underline font-bold">Verifikasi Batch</button>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- MOBILE BOTTOM NAVIGATION BAR (Thumb-friendly Dock) -->
+  <!-- (PRD & User Request: "untuk navbar tampilan mobile itu gua saranin sih letaknya bagian bawah") -->
+  <!-- ========================================================================= -->
+  <nav class="fixed bottom-3 inset-x-3 max-w-md mx-auto z-50 md:hidden bg-brand-forest/95 backdrop-blur-xl rounded-2xl p-1.5 shadow-dock border border-white/20 text-white" aria-label="Navigasi Bawah Mobile">
+    <div class="grid grid-cols-5 items-center text-center relative">
+      
+      <!-- 1. Beranda -->
+      <a href="#hero" id="nav-btn-hero" class="flex flex-col items-center py-1.5 px-1 rounded-xl text-brand-mint font-semibold transition-all duration-200 hover:text-white active:scale-95">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <span class="text-[10px] mt-0.5 leading-tight font-medium">Beranda</span>
+      </a>
+
+      <!-- 2. Passport / Batch -->
+      <a href="#passport-info" id="nav-btn-passport" class="flex flex-col items-center py-1.5 px-1 rounded-xl text-slate-300 font-semibold transition-all duration-200 hover:text-white active:scale-95">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </svg>
+        <span class="text-[10px] mt-0.5 leading-tight font-medium">Passport</span>
+      </a>
+
+      <!-- 3. CENTER ACTION BUTTON: Scan / Verifikasi Batch (Prominent floating circle) -->
+      <div class="flex justify-center -mt-6">
+        <button onclick="openVerificationModal('JSG-001')" class="w-12 h-12 rounded-full bg-gradient-to-tr from-citrus-deep to-citrus-primary text-white flex items-center justify-center shadow-glow-orange border-2 border-white transform active:scale-90 transition-transform duration-150" title="Verifikasi Batch & Pindai QR">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 4. Perjalanan -->
+      <a href="#perjalanan" id="nav-btn-perjalanan" class="flex flex-col items-center py-1.5 px-1 rounded-xl text-slate-300 font-semibold transition-all duration-200 hover:text-white active:scale-95">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+        </svg>
+        <span class="text-[10px] mt-0.5 leading-tight font-medium">Perjalanan</span>
+      </a>
+
+      <!-- 5. Dampak -->
+      <a href="#dampak" id="nav-btn-dampak" class="flex flex-col items-center py-1.5 px-1 rounded-xl text-slate-300 font-semibold transition-all duration-200 hover:text-white active:scale-95">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+        </svg>
+        <span class="text-[10px] mt-0.5 leading-tight font-medium">Dampak</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- ========================================================================= -->
+  <!-- INTERACTIVE BATCH VERIFICATION MODAL / DRAWER -->
+  <!-- ========================================================================= -->
+  <div id="verificationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-dark/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    
+    <div id="modalCard" class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-brand-forest/15 transform scale-95 transition-transform duration-300 relative p-6 sm:p-8">
+      
+      <!-- Close Button -->
+      <button onclick="closeVerificationModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-brand-leaf uppercase tracking-wider">Laboratorium Mutu UNAND</span>
+          <h2 id="modalTitle" class="text-2xl font-black text-brand-forest">Sertifikat Batch Passport</h2>
+        </div>
+      </div>
+
+      <!-- Batch Identity Highlight -->
+      <div class="bg-brand-surface p-4 rounded-2xl border border-brand-forest/10 mb-5 flex items-center justify-between">
+        <div>
+          <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Nomor Batch Terpilih</span>
+          <div id="modalBatchId" class="text-2xl font-black font-mono text-brand-forest">JSG-001</div>
+        </div>
+        <div class="text-right">
+          <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-300">
+            <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Terverifikasi Sah</span>
+          </span>
+          <span id="modalHarvestDate" class="text-[11px] text-slate-500 block mt-1">Panen: 08 Nov 2026</span>
+        </div>
+      </div>
+
+      <!-- Lab Parameters Checklist -->
+      <p class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Hasil Uji Laboratorium Terbuka:</p>
+      
+      <div class="space-y-2.5 text-xs">
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+          <div>
+            <span class="font-bold text-slate-800 block">Kandungan Sari Jeruk Siam</span>
+            <span class="text-slate-500">Metode perasan dingin higienis</span>
+          </div>
+          <span class="font-black text-sm text-brand-leaf font-mono">40.2%</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+          <div>
+            <span class="font-bold text-slate-800 block">Total Padatan Terlarut (°Brix)</span>
+            <span class="text-slate-500">Standar energi gel olahraga</span>
+          </div>
+          <span class="font-black text-sm text-citrus-deep font-mono">62.5 °Bx</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+          <div>
+            <span class="font-bold text-slate-800 block">Tingkat Keasaman (pH)</span>
+            <span class="text-slate-500">Aman untuk lambung pelari saat race</span>
+          </div>
+          <span class="font-black text-sm text-slate-800 font-mono">3.8 pH</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+          <div>
+            <span class="font-bold text-slate-800 block">Cemaran Mikroba & E. coli</span>
+            <span class="text-slate-500">Standar Keamanan Pangan SNI</span>
+          </div>
+          <span class="px-2 py-0.5 rounded font-bold text-emerald-800 bg-emerald-100 font-mono">0 CFU/g (Negatif)</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+          <div>
+            <span class="font-bold text-slate-800 block">Integritas Kemasan Foil</span>
+            <span class="text-slate-500">Uji kebocoran vakum 50 ml</span>
+          </div>
+          <span class="px-2 py-0.5 rounded font-bold text-emerald-800 bg-emerald-100 font-mono">Lolos Uji Kedap</span>
+        </div>
+      </div>
+
+      <!-- Provenance Footnote -->
+      <div class="mt-5 p-4 rounded-xl bg-brand-mint/40 border border-brand-leaf/20 text-xs text-brand-forest">
+        <div class="font-bold mb-0.5">Asal Kebun Terlacak:</div>
+        <p class="text-slate-600">Nagari Koto Tinggi, Gunung Omeh, Kab. Lima Puluh Kota, Sumatera Barat. Dikelola oleh Koperasi Mitra Tani Jeruk Gunung Omeh.</p>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="mt-6 flex items-center gap-3">
+        <button onclick="copyToClipboard('JSG-001', 'Nomor batch berhasil disalin!')" class="flex-1 py-3 px-4 rounded-xl bg-brand-surfaceAlt hover:bg-slate-200 font-bold text-xs text-slate-700 transition-colors flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <span>Salin ID Batch</span>
+        </button>
+        <button onclick="closeVerificationModal()" class="flex-1 py-3 px-4 rounded-xl bg-brand-forest hover:bg-brand-leaf font-bold text-xs text-white transition-colors">
+          Tutup Lembar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: INTERACTION & ANIMATION LOGIC -->
+  <!-- ========================================================================= -->
+  <script>
+    // -------------------------------------------------------------
+    // 1. Toast Feedback Helper
+    // -------------------------------------------------------------
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-bold text-white shadow-lg transition-all duration-300 transform translate-y-4 opacity-0 ${
+        type === 'success' ? 'bg-brand-forest border border-brand-leaf/40' : 'bg-slate-800'
+      }`;
+      toast.innerHTML = `
+        <svg class="w-4 h-4 text-citrus-amber shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+
+      // Trigger entrance
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-4', 'opacity-0');
+      });
+
+      // Auto dismiss
+      setTimeout(() => {
+        toast.classList.add('translate-y-4', 'opacity-0');
+        setTimeout(() => toast.remove(), 350);
+      }, 3000);
+    }
+
+    // -------------------------------------------------------------
+    // 2. Clipboard Copy Helper
+    // -------------------------------------------------------------
+    function copyToClipboard(text, customMessage) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(customMessage || `Disalin: ${text}`);
+        }).catch(() => {
+          showToast(`Tersalin: ${text}`);
+        });
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showToast(customMessage || `Disalin: ${text}`);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 3. Verification Modal Logic
+    // -------------------------------------------------------------
+    const batchDatabase = {
+      'JSG-001': {
+        title: 'Sertifikat Batch Passport — JSG-001',
+        harvestDate: 'Panen: 08 Nov 2026',
+        brix: '62.5 °Bx',
+        ratio: '40.2%',
+        pH: '3.8 pH',
+        origin: 'Nagari Koto Tinggi, Gunung Omeh, Kab. Lima Puluh Kota, Sumatera Barat. Dikelola oleh Koperasi Mitra Tani Jeruk Gunung Omeh.'
+      },
+      'JSG-002': {
+        title: 'Sertifikat Batch Passport — JSG-002',
+        harvestDate: 'Panen: 12 Nov 2026',
+        brix: '64.0 °Bx',
+        ratio: '42.0%',
+        pH: '3.9 pH',
+        origin: 'Sentra Hortikultura Koto Tinggi, Gunung Omeh. Batch khusus performa ketahanan lari marathon.'
+      }
+    };
+
+    function openVerificationModal(batchId = 'JSG-001') {
+      const modal = document.getElementById('verificationModal');
+      const card = document.getElementById('modalCard');
+      const batchData = batchDatabase[batchId] || batchDatabase['JSG-001'];
+
+      document.getElementById('modalBatchId').textContent = batchId;
+      document.getElementById('modalHarvestDate').textContent = batchData.harvestDate;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVerificationModal() {
+      const modal = document.getElementById('verificationModal');
+      const card = document.getElementById('modalCard');
+
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+      document.body.style.overflow = '';
+    }
+
+    // Close on outside click
+    document.getElementById('verificationModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeVerificationModal();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeVerificationModal();
+      }
+    });
+
+    // -------------------------------------------------------------
+    // 4. Scroll Reveal via Intersection Observer
+    // -------------------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal-on-scroll');
+      
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      reveals.forEach(el => observer.observe(el));
+
+      // -------------------------------------------------------------
+      // 5. Mobile Bottom Navigation Active Section Tracker
+      // -------------------------------------------------------------
+      const sections = [
+        { id: 'hero', navBtn: 'nav-btn-hero' },
+        { id: 'passport-info', navBtn: 'nav-btn-passport' },
+        { id: 'perjalanan', navBtn: 'nav-btn-perjalanan' },
+        { id: 'dampak', navBtn: 'nav-btn-dampak' }
+      ];
+
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY + 200;
+
+        sections.forEach(sec => {
+          const el = document.getElementById(sec.id);
+          const btn = document.getElementById(sec.navBtn);
+          if (!el || !btn) return;
+
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            btn.classList.add('text-brand-mint');
+            btn.classList.remove('text-slate-300');
+          } else {
+            btn.classList.remove('text-brand-mint');
+            btn.classList.add('text-slate-300');
+          }
+        });
+      }, { passive: true });
+    });
+  </script>
+</body>
+</html>
